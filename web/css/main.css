@@ -680,6 +680,10 @@ ul.category-products ul li a {
     font-size: 12px;
 }
 
+.del-cart-item {
+    cursor: pointer;
+}
+
 .left-sidebar h2, .brands_products h2 {
     color: #FE980F;
     font-family: 'Roboto', sans-serif;

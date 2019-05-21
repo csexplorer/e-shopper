@@ -94,11 +94,11 @@ use yii\helpers\Url;
                             <span>
                                 <span>US $<?= $product->price ?></span>
                                 <label>Quantity:</label>
-                                <input type="text" value="3" />
-                                <button type="button" class="btn btn-fefault cart">
+                                <input type="text" id="qty" value="1" />
+                                <a href="<?= Url::to(['cart/add', 'id' => $product->id]) ?>" data-id="<?= $product->id ?>" class="btn btn-fefault add-to-cart cart">
                                     <i class="fa fa-shopping-cart"></i>
                                     Add to cart
-                                </button>
+                                </a>
                             </span>
                             <p><b>Availability:</b> In Stock</p>
                             <p><b>Condition:</b> New</p>
@@ -125,7 +125,7 @@ use yii\helpers\Url;
                                                         <?= Html::img('/images/products/' . $hit->img, ['alt' => $hit->img]) ?>
                                                         <h2>$<?= $hit->price ?></h2>
                                                         <p><a href="<?= Url::to(['product/view', 'id' => $hit->id]) ?>"><?= $hit->name ?></a></p>
-                                                        <button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
+                                                        <a href="<?= Url::to(['cart/add', 'id' => $hit->id]) ?>" data-id="<?= $hit->id ?>" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
                                                     </div>
                                                 </div>
                                             </div>

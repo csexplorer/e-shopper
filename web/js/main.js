@@ -11,6 +11,38 @@
 	 $('#cart-modal').modal();
  }
 
+ function getCart() {
+	$.ajax({
+		url: '/cart/show',
+		type: 'GET',
+		success: function (res) {
+			if (!res) return alert('Error');
+			showCart(res);
+		},
+		error: function (err) {
+			alert('Error!');
+		}
+	});
+	return false;
+ }
+
+ $('#cart-modal .modal-body').on('click', '.del-cart-item', function () {
+	 var id = $(this).data('id');
+	 $.ajax({
+		url: '/cart/delete',
+		data: {id: id},
+		type: 'GET',
+		success: function (res) {
+			if (!res) return alert('Error');
+			showCart(res);
+		  // console.log(res);
+		},
+		error: function (err) {
+			alert('Error!');
+		}
+	})
+ })
+
  function clearCart() {
 	 $.ajax({
 		 url: '/cart/clear',
@@ -27,10 +59,11 @@
  
  $('.add-to-cart').on('click', function(e) {
      e.preventDefault();
-     var id = $(this).data('id');
+		 var id = $(this).data('id')
+		 		 qty = $('#qty').val();
      $.ajax({
 			 url: '/cart/add',
-			 data: {id: id},
+			 data: {id: id, qty: qty},
 			 type: 'GET',
 			 success: function (res) {
 				 if (!res) return alert('Error');
