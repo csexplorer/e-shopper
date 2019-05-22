@@ -99,7 +99,7 @@ ltAppAsset::register($this);
                                     <li><a href="#"><i class="fa fa-star"></i> Wishlist</a></li>
                                     <li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Checkout</a></li>
                                     <li><a href="#" onclick="return getCart()"><i class="fa fa-shopping-cart"></i> Cart</a></li>
-                                    <li><a href="<?= Url::to(['/admin']) ?>"><i class="fa fa-lock"></i> Login</a></li>
+                                    
                                 </ul>
                             </div>
                         </div>
@@ -313,17 +313,6 @@ ltAppAsset::register($this);
             </div>
 
         </footer><!--/Footer-->
-
-        <?php Modal::begin([
-            'id' => 'cart-modal',
-            'header' => '<h2>Your Cart</h2>',
-            'size' => 'modal-lg',
-            'footer' => '<button class="btn btn-default">Continue to buy</button>
-            <a href="' . Url::to(['cart/view']) . '" class="btn btn-success">Order</a>
-            <button class="btn btn-danger" onclick="clearCart()">Clear Cart</button>'
-        ]) ?>
-
-        <?php Modal::end() ?>
 
         <?php $this->endBody() ?>
     </body>
