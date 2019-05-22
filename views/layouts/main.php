@@ -318,7 +318,7 @@ ltAppAsset::register($this);
             'id' => 'cart-modal',
             'header' => '<h2>Your Cart</h2>',
             'size' => 'modal-lg',
-            'footer' => '<button class="btn btn-default">Continue to buy</button>
+            'footer' => '<button class="btn btn-default" data-dismiss="modal">Continue to buy</button>
             <a href="' . Url::to(['cart/view']) . '" class="btn btn-success">Order</a>
             <button class="btn btn-danger" onclick="clearCart()">Clear Cart</button>'
         ]) ?>
