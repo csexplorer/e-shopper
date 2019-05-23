@@ -107,6 +107,10 @@ use yii\helpers\Url;
                         </div><!--/product-information-->
                     </div>
                 </div><!--/product-details-->
+
+                <div class="content">
+                    <?= $product->content ?>
+                </div>
                 
                 <?php if (!empty($hits)) : ?>
                     <div class="recommended_items"><!--recommended_items-->

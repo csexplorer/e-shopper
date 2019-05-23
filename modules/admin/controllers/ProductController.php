@@ -3,31 +3,26 @@
 namespace app\modules\admin\controllers;
 
 use Yii;
-use app\modules\admin\models\Order;
+use app\modules\admin\models\Product;
 use yii\data\ActiveDataProvider;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * OrderController implements the CRUD actions for Order model.
+ * ProductController implements the CRUD actions for Product model.
  */
-class OrderController extends AppAdminController
+class ProductController extends AppAdminController
 {
     /**
-     * Lists all Order models.
+     * Lists all Product models.
      * @return mixed
      */
     public function actionIndex()
     {
         $dataProvider = new ActiveDataProvider([
-            'query' => Order::find(),
+            'query' => Product::find(),
             'pagination' => [
                 'pageSize' => 5
-            ],
-            'sort' => [
-                'defaultOrder' => [
-                    'status' => SORT_ASC
-                ]
             ]
         ]);
 
@@ -37,7 +32,7 @@ class OrderController extends AppAdminController
     }
 
     /**
-     * Displays a single Order model.
+     * Displays a single Product model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -50,13 +45,13 @@ class OrderController extends AppAdminController
     }
 
     /**
-     * Creates a new Order model.
+     * Creates a new Product model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Order();
+        $model = new Product();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -68,7 +63,7 @@ class OrderController extends AppAdminController
     }
 
     /**
-     * Updates an existing Order model.
+     * Updates an existing Product model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -88,7 +83,7 @@ class OrderController extends AppAdminController
     }
 
     /**
-     * Deletes an existing Order model.
+     * Deletes an existing Product model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -102,15 +97,15 @@ class OrderController extends AppAdminController
     }
 
     /**
-     * Finds the Order model based on its primary key value.
+     * Finds the Product model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Order the loaded model
+     * @return Product the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Order::findOne($id)) !== null) {
+        if (($model = Product::findOne($id)) !== null) {
             return $model;
         }
 

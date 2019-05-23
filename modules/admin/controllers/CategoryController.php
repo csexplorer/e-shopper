@@ -51,6 +51,7 @@ class CategoryController extends AppAdminController
         $model = new Category();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            Yii::$app->session->setFlash('success', "Category {$model->name} successfully saved.");
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
@@ -71,6 +72,7 @@ class CategoryController extends AppAdminController
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            Yii::$app->session->setFlash('success', "Category {$model->name} successfully updated.");
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
@@ -89,6 +91,7 @@ class CategoryController extends AppAdminController
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
+        Yii::$app->session->setFlash('success', "Category successfully deleted.");
 
         return $this->redirect(['index']);
     }

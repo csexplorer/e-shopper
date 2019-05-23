@@ -65,6 +65,16 @@ $config = [
             'defaultRoute' => 'order/index'
         ],
     ],
+    'controllerMap' => [
+        'elfinder' => [
+			'class' => 'mihaildev\elfinder\PathController',
+			'access' => ['@'],
+			'root' => [
+				'path' => 'uploads/global',
+				'name' => 'Global'
+			],
+		]
+    ],
     'params' => $params,
 ];
 

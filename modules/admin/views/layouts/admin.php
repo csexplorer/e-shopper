@@ -19,7 +19,7 @@ ltAppAsset::register($this);
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <?php $this->registerCsrfMetaTags() ?>
-        <title><?= Html::encode($this->title) ?></title>
+        <title>Admin Panel | <?= Html::encode($this->title) ?></title>
         <?php $this->head() ?>
     </head><!--/head-->
 
@@ -131,7 +131,7 @@ ltAppAsset::register($this);
                                     <li class="dropdown"><a href="#">Products<i class="fa fa-angle-down"></i></a>
                                         <ul role="menu" class="sub-menu">
                                             <li><a href="<?= Url::to(['product/index']) ?>">Product List</a></li>
-                                            <li><a href="<?= Url::to(['produc/create']) ?>">Create Product</a></li> 
+                                            <li><a href="<?= Url::to(['product/create']) ?>">Create Product</a></li> 
                                         </ul>
                                     </li>
                                 </ul>
@@ -150,6 +150,16 @@ ltAppAsset::register($this);
         </header><!--/header-->
 
         <div class="container">
+
+            <?php if (Yii::$app->session->hasFlash('success')) : ?>
+                <div class="alert alert-success alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <?= Yii::$app->session->getFlash('success') ?>
+                </div>
+            <?php endif; ?>
+            
             <?= $content ?>
         </div>
 
