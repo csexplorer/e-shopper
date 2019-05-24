@@ -28,7 +28,7 @@ class CategoryController extends AppController {
         }
 
         $query = Product::find()->where(['category_id' => $id]);
-        $pages = new \yii\data\Pagination(['totalCount' => $query->count(), 'pageSize' => 3, 'forcePageParam' => false, 'pageSizeParam' => false]);
+        $pages = new \yii\data\Pagination(['totalCount' => $query->count(), 'pageSize' => 6, 'forcePageParam' => false, 'pageSizeParam' => false]);
         $products = $query->offset($pages->offset)->limit($pages->limit)->all();
         $this->setMeta('E-SHOPPER | ' . $category->name, $category->keywords, $category->description);
         

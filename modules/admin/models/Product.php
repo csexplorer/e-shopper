@@ -21,6 +21,18 @@ use Yii;
  */
 class Product extends \yii\db\ActiveRecord
 {
+    public $image;
+    public $gallery;
+
+    public function behaviors()
+    {
+        return [
+            'image' => [
+                'class' => 'rico\yii2images\behaviors\ImageBehave',
+            ]
+        ];
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -39,6 +51,8 @@ class Product extends \yii\db\ActiveRecord
             [['category_id'], 'integer'],
             [['content', 'hit', 'new', 'sale'], 'string'],
             [['price'], 'number'],
+            [['image'], 'file', 'extensions' => 'png, jpg'],
+            [['gallery'], 'file', 'extensions' => 'png, jpg', 'maxFiles' => 4],
             [['name', 'keywords', 'description', 'img'], 'string', 'max' => 255],
         ];
     }
@@ -56,7 +70,8 @@ class Product extends \yii\db\ActiveRecord
             'price' => 'Price',
             'keywords' => 'Keywords',
             'description' => 'Description',
-            'img' => 'Image',
+            'image' => 'Image',
+            'gallery' => 'Gallery',
             'hit' => 'Hit',
             'new' => 'New',
             'sale' => 'Sale',
@@ -65,5 +80,33 @@ class Product extends \yii\db\ActiveRecord
 
     public function getCategory() {
         return $this->hasOne(Category::className(), ['id' => 'category_id']);
+    }
+
+    public function upload() {
+        if ($this->validate()) {
+            $path = "uploads/store/" . $this->image->baseName . "." . $this->image->extension;
+            $this->image->saveAs($path);
+            
+            $this->attachImage($path, true);
+            unlink($path);
+
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function uploadGallery() {
+        if ($this->validate()) {
+            foreach ($this->gallery as $file) {
+                $path = "uploads/store/" . $file->baseName . "." . $file->extension;
+                $file->saveAs($path);
+                $this->attachImage($path);
+                unlink($path);
+            }
+            return true;
+        } else {
+            return false;
+        }
     }
 }

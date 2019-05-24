@@ -50,40 +50,30 @@ use yii\helpers\Url;
                 <div class="product-details"><!--product-details-->
                     <div class="col-sm-5">
                         <div class="view-product">
-                            <?= Html::img('/images/products/' . $product->img, ['alt' => $product->name]) ?>
+                            <?= Html::img($product->getImage()->getUrl(), ['alt' => $product->name]) ?>
                             <h3>ZOOM</h3>
                         </div>
-                        <div id="similar-product" class="carousel slide" data-ride="carousel">
-
-                             Wrapper for slides 
-                            <div class="carousel-inner">
-                                <div class="item active">
-                                    <a href=""><img src="/images/product-details/similar1.jpg" alt=""></a>
-                                    <a href=""><img src="/images/product-details/similar2.jpg" alt=""></a>
-                                    <a href=""><img src="/images/product-details/similar3.jpg" alt=""></a>
-                                </div>
-                                <div class="item">
-                                    <a href=""><img src="/images/product-details/similar1.jpg" alt=""></a>
-                                    <a href=""><img src="/images/product-details/similar2.jpg" alt=""></a>
-                                    <a href=""><img src="/images/product-details/similar3.jpg" alt=""></a>
-                                </div>
-                                <div class="item">
-                                    <a href=""><img src="/images/product-details/similar1.jpg" alt=""></a>
-                                    <a href=""><img src="/images/product-details/similar2.jpg" alt=""></a>
-                                    <a href=""><img src="/images/product-details/similar3.jpg" alt=""></a>
-                                </div>
-
+                        <?php $count = count($product->getImages()); if ($count > 0) : ?>
+                            <div id="similar-product" class="carousel slide" data-ride="carousel">
+                                <div class="carousel-inner">
+                                    <?php $i = 0;  foreach ($product->getImages() as $img) : ?>
+                                        <?php if ($i % 3 === 0) : ?>
+                                            <div class="item<?= ($i === 0) ? ' active' : null ?>">
+                                        <?php endif; ?>
+                                            <a href=""><img src="<?= $img->getUrl('85x84') ?>" alt=""></a>
+                                        <?php $i++; if ($i % 3 === 0 || $i === $count) : ?>
+                                            </div>
+                                        <?php endif; ?>
+                                    <?php endforeach; ?>
+                                </div> 
+                                <a class="left item-control" href="#similar-product" data-slide="prev">
+                                    <i class="fa fa-angle-left"></i>
+                                </a>
+                                <a class="right item-control" href="#similar-product" data-slide="next">
+                                    <i class="fa fa-angle-right"></i>
+                                </a>
                             </div>
-
-                             Controls 
-                            <a class="left item-control" href="#similar-product" data-slide="prev">
-                                <i class="fa fa-angle-left"></i>
-                            </a>
-                            <a class="right item-control" href="#similar-product" data-slide="next">
-                                <i class="fa fa-angle-right"></i>
-                            </a>
-                        </div>
-
+                        <?php endif; ?>
                     </div>
                     <div class="col-sm-7">
                         <div class="product-information"><!--/product-information-->
@@ -126,7 +116,7 @@ use yii\helpers\Url;
                                             <div class="product-image-wrapper">
                                                 <div class="single-products">
                                                     <div class="productinfo text-center">
-                                                        <?= Html::img('/images/products/' . $hit->img, ['alt' => $hit->img]) ?>
+                                                        <?= Html::img($hit->getImage()->getUrl(), ['alt' => $hit->img]) ?>
                                                         <h2>$<?= $hit->price ?></h2>
                                                         <p><a href="<?= Url::to(['product/view', 'id' => $hit->id]) ?>"><?= $hit->name ?></a></p>
                                                         <a href="<?= Url::to(['cart/add', 'id' => $hit->id]) ?>" data-id="<?= $hit->id ?>" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
